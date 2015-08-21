@@ -4,69 +4,62 @@
 	<meta http-equiv="Pragma" content="no-cache">
 	<meta http-equiv="Expire" content="-1">
 
-  	<title>'cod-ui'</title>
+  	<title>'codx-ui'</title>
 	<link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css" />
 	<link rel="stylesheet" type="text/css" href="css/portal.css" />
+	
 	<script type="text/javascript" src="extjs/ext-all.js"></script>
 	<script type="text/javascript" src="js/portal/Portlet.js"></script>
 	<script type="text/javascript" src="js/portal/PortalColumn.js"></script>
 	<script type="text/javascript" src="js/portal/PortalDropZone.js"></script>
 	<script type="text/javascript" src="js/portal/PortalPanel.js"></script>
 	<script type="text/javascript" src="js/messaging/MessagingHub.js"></script>
+	
 	<script type="text/javascript">
 		Ext.require([ '*' ]);
-	
 		var viewport;
+
 		function appenPortlet(obj) {		
 			var column1 = Ext.getCmp('col-1');
 			for (var i in obj){	  
-				
 				var html = '<iframe id="' + obj[i].id +'" '+  'src="' + obj[i].url +'" '+ 'width="100%" height="100%"></iframe>';
-				var portlet = new Ext.app.Portlet(
-						{
-							id: 'portlet' + obj[i].id,
-							title: obj[i].title,
-							height: 400,
-							html: html
-						});
+				var portlet = new Ext.app.Portlet({
+					id: 'portlet' + obj[i].id,
+					title: obj[i].title,
+					height: 400,
+					html: html
+				});
 				column1.add(portlet);
 			}
 		}
 		
 		Ext.onReady(function() {
-			
 			Ext.define('Task', {
 				extend: 'Ext.data.Model',
 				fields: [
-					{name: 'title',     type: 'string'},
-					{name: 'type',     type: 'string'}
+					{ name: 'title', type: 'string'},
+					{ name: 'type',  type: 'string'}
 				]
 			});
 	
 			var store = Ext.create('Ext.data.TreeStore', {
 				model: 'Task',
 				proxy: {
-					//type: 'memory'
 					type: 'ajax',
 					url: 'config/doc-search.json'
 				},
 				folderSort: true
 			});
 	
-			//var data = ;
-			//var rootNode = store.setRootNode(data);
-	
 			viewport = Ext.create('Ext.Viewport', {
 				layout : 'border',
-				items : [
-				{
+				items : [{
 					id: 'app-header',
 	                xtype: 'box',
 	                region: 'north',
 	                height: 40,
 	                html: 'Cross-Domain Msg - ExtJS portal  |  CODX'
-				},
-				{
+				},{
 					region : 'west',
 					split : true,
 					width : 400,
@@ -74,26 +67,21 @@
 					maxWidth : 400,
 					collapsible : true,
 					margin : '35 0 5 5',
-					items : [
-						
-					{
+					items : [{
 						xtype:'panel',
 						layout:'column',
 						border : false,
 						margin : '5 5 5 5',
-						items:[
-						{
+						items:[{
 							html : 'Search',
 							autoScroll : true,
 							margin : '0 5 0 0',
 							border : false
-						},
-						{
+						},{
 							columnWidth: '0.75',
 							border : false,
 							xtype : 'textfield'
-						},
-						{
+						},{
 							margin : '0 0 0 5',
 							xtype:'button',
 							text: 'go'
@@ -109,9 +97,8 @@
 						store: store,
 						multiSelect: true,
 						singleExpand: false,
-						//the 'columns' property is now 'headers'
 						columns: [{
-							xtype: 'treecolumn', //this is so we know which column will show the tree
+							xtype: 'treecolumn',
 							text: 'Title',
 							flex: 2,
 							sortable: true,
@@ -123,18 +110,15 @@
 							sortable: true
 						}]
 					})]
-				}, {
+				},{
 					region : 'center',
 					margin : '35 5 5 0',
 					autoScroll : true,
-					//defaultType : 'container',
-					items : [ 
-					{
+					items : [{
 						xtype : 'panel',
 						frame: false,
 						border: false,
-						items : [
-						{
+						items : [{
 							xtype: 'panel',
 							title: 'Metadata',
 							frame: false,
@@ -144,12 +128,11 @@
 								xtype: 'portalpanel',
 								frame: false,
 								border: false,
-								items: [
-								{
+								items: [{
 									id: 'col-1'
 								}]
 							}]
-						}, {
+						},{
 							title : 'Relationships',
 							autoScroll : true
 						}]
@@ -168,6 +151,7 @@
 				  console.log("Error: " + response.status);
 			   }
 			});
+			
 			initMessagingHubListener();			
 		});    
 	</script>
