@@ -1,0 +1,27 @@
+[
+    {
+        "id": "ifr4",
+        "title": "Form",
+        "url": "http://localhost:8080/codx-ui/widgets/form-test.html"
+    },
+    {
+        "id": "ifr3",
+        "title": "Publisher Viewer",
+        "url": "http://localhost:8080/codx-ui/widgets/publisher.html"
+    },
+    {
+        "id": "ifr2",
+        "title": "Subscriber Viewer",
+        "url": "http://localhost:8080/codx-ui/widgets/subscriber.html"
+    },
+    {
+        "id": "ifr1",
+        "title": "Different Domain TestA",
+        "url": "http://localhost:8081/otherdomain/widgets/A"
+    },
+    {
+        "id": "ifr0",
+        "title": "Different Domain TestB",
+        "url": "https://localhost:8081/otherdomain/widgets/B"
+    }
+]

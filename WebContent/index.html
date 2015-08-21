@@ -1,0 +1,178 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Expire" content="-1">
+
+  	<title>'cod-ui'</title>
+	<link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css" />
+	<link rel="stylesheet" type="text/css" href="css/portal.css" />
+	<script type="text/javascript" src="extjs/ext-all.js"></script>
+	<script type="text/javascript" src="js/portal/Portlet.js"></script>
+	<script type="text/javascript" src="js/portal/PortalColumn.js"></script>
+	<script type="text/javascript" src="js/portal/PortalDropZone.js"></script>
+	<script type="text/javascript" src="js/portal/PortalPanel.js"></script>
+	<script type="text/javascript" src="js/messaging/MessagingHub.js"></script>
+	<script type="text/javascript">
+		Ext.require([ '*' ]);
+	
+		var viewport;
+		function appenPortlet(obj) {		
+			var column1 = Ext.getCmp('col-1');
+			for (var i in obj){	  
+				
+				var html = '<iframe id="' + obj[i].id +'" '+  'src="' + obj[i].url +'" '+ 'width="100%" height="100%"></iframe>';
+				var portlet = new Ext.app.Portlet(
+						{
+							id: 'portlet' + obj[i].id,
+							title: obj[i].title,
+							height: 400,
+							html: html
+						});
+				column1.add(portlet);
+			}
+		}
+		
+		Ext.onReady(function() {
+			
+			Ext.define('Task', {
+				extend: 'Ext.data.Model',
+				fields: [
+					{name: 'title',     type: 'string'},
+					{name: 'type',     type: 'string'}
+				]
+			});
+	
+			var store = Ext.create('Ext.data.TreeStore', {
+				model: 'Task',
+				proxy: {
+					//type: 'memory'
+					type: 'ajax',
+					url: 'config/doc-search.json'
+				},
+				folderSort: true
+			});
+	
+			//var data = ;
+			//var rootNode = store.setRootNode(data);
+	
+			viewport = Ext.create('Ext.Viewport', {
+				layout : 'border',
+				items : [
+				{
+					id: 'app-header',
+	                xtype: 'box',
+	                region: 'north',
+	                height: 40,
+	                html: 'Cross-Domain Msg - ExtJS portal  |  CODX'
+				},
+				{
+					region : 'west',
+					split : true,
+					width : 400,
+					minWidth : 175,
+					maxWidth : 400,
+					collapsible : true,
+					margin : '35 0 5 5',
+					items : [
+						
+					{
+						xtype:'panel',
+						layout:'column',
+						border : false,
+						margin : '5 5 5 5',
+						items:[
+						{
+							html : 'Search',
+							autoScroll : true,
+							margin : '0 5 0 0',
+							border : false
+						},
+						{
+							columnWidth: '0.75',
+							border : false,
+							xtype : 'textfield'
+						},
+						{
+							margin : '0 0 0 5',
+							xtype:'button',
+							text: 'go'
+						}]
+					}, 
+					Ext.create('Ext.tree.Panel', {
+						width: 400,
+						height: 300,
+						renderTo: Ext.getBody(),
+						collapsible: true,
+						useArrows: true,
+						rootVisible: false,
+						store: store,
+						multiSelect: true,
+						singleExpand: false,
+						//the 'columns' property is now 'headers'
+						columns: [{
+							xtype: 'treecolumn', //this is so we know which column will show the tree
+							text: 'Title',
+							flex: 2,
+							sortable: true,
+							dataIndex: 'title'
+						},{
+							text: 'Type',
+							flex: 1,
+							dataIndex: 'type',
+							sortable: true
+						}]
+					})]
+				}, {
+					region : 'center',
+					margin : '35 5 5 0',
+					autoScroll : true,
+					//defaultType : 'container',
+					items : [ 
+					{
+						xtype : 'panel',
+						frame: false,
+						border: false,
+						items : [
+						{
+							xtype: 'panel',
+							title: 'Metadata',
+							frame: false,
+							border: false,
+							items: [{
+								id: 'portalPanel',
+								xtype: 'portalpanel',
+								frame: false,
+								border: false,
+								items: [
+								{
+									id: 'col-1'
+								}]
+							}]
+						}, {
+							title : 'Relationships',
+							autoScroll : true
+						}]
+					} ]
+				} ]
+			});
+			
+			//make ajax call to server
+			Ext.Ajax.request({
+			   url: 'config/widget-config.json',
+			   success: function(response, opts) {				  
+				  var obj = Ext.JSON.decode(response.responseText);
+				  appenPortlet(obj);
+			   },
+			   failure: function(response, opts) {
+				  console.log("Error: " + response.status);
+			   }
+			});
+			initMessagingHubListener();			
+		});    
+	</script>
+</head>
+<body onLoad="">
+
+</body>
+</html>

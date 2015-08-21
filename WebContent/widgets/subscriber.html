@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>my: sub</title>
+		<script type="text/javascript" src="../js/messaging/MessagingClientHub.js"></script>
+		<script type="text/javascript">
+			var _SUBSCRIBER_ID_ = 'ifr2';
+			
+			function subscribeMe() {
+				subscribe('my_message');
+			}
+		</script>
+	</head>
+	<body onload='initSubscriberListener()' >
+		<h2>my: Sub</h2>
+	  <div> 
+		<input type="button" value="Subscribe to a Message" onclick="subscribeMe()"/>
+	  </div>
+	  <div id="output"></div>
+	</body>
+</html>

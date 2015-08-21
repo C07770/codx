@@ -1,0 +1,109 @@
+{
+    "text": ".",
+    "children": [
+        {
+            "title": "Agreement-NewYork-MAIN",
+            "duration": 13.25,
+            "type": "CustodyAgreement",
+            "iconCls": "task-folder",
+            "expanded": true,
+            "children": [
+                {
+                    "title": "Custodianagreements",
+                    "duration": 1.25,
+                    "type": "CustodyAgreement",
+                    "iconCls": "task-folder",
+                    "children": [
+                        {
+                            "title": "CustodyAgreementforCharities, Endowments&Foundations",
+                            "duration": 0.25,
+                            "type": "CustodyAgreement",
+                            "leaf": true,
+                            "iconCls": "task"
+                        },
+                        {
+                            "title": "DirectCustody-DirectCustodyAgreement-Mumbai",
+                            "duration": 0.4,
+                            "type": "CustodyAgreement",
+                            "leaf": true,
+                            "iconCls": "task"
+                        },
+                        {
+                            "title": "GCAforLondon, Dutchlaw",
+                            "duration": 0.4,
+                            "type": "CustodyAgreement",
+                            "leaf": true,
+                            "iconCls": "task"
+                        },
+                        {
+                            "title": "BearFXagreement",
+                            "duration": 0.2,
+                            "type": "MasterAgreement",
+                            "leaf": true,
+                            "iconCls": "task"
+                        }
+                    ]
+                },
+                {
+                    "title": "GCA, OsloBranch",
+                    "duration": 12,
+                    "type": "CustodyAgreement",
+                    "iconCls": "task-folder",
+                    "expanded": true,
+                    "children": [
+                        {
+                            "title": "GlobalCustody-DomesticCustodyAgreement-NY",
+                            "duration": 6.5,
+                            "type": "CustodyAgreement",
+                            "leaf": true,
+                            "iconCls": "task"
+                        },
+                        {
+                            "title": "GlobalCustody-GlobalCustodyAgreement-HongKong",
+                            "duration": 2.75,
+                            "type": "CustodyAgreement",
+                            "iconCls": "task-folder",
+                            "children": [
+                                {
+                                    "title": "BullionTermsandConditionsAgreement",
+                                    "duration": 1.25,
+                                    "type": "MasterAgreement",
+                                    "iconCls": "task",
+                                    "leaf": true
+                                },
+                                {
+                                    "title": "ISDAbyReference",
+                                    "duration": 1.5,
+                                    "type": "MasterAgreement",
+                                    "iconCls": "task",
+                                    "leaf": true
+                                }
+                            ]
+                        },
+                        {
+                            "title": "GlobalCustody-GlobalCustodyAgreement-Luxembourg",
+                            "duration": 2.75,
+                            "type": "CustodyAgreement",
+                            "leaf": true,
+                            "iconCls": "task"
+                        },
+                        {
+                            "title": "DerivativesTradingArrangements(DTA)",
+                            "duration": 0.75,
+                            "type": "MasterAgreement",
+                            "leaf": true,
+                            "iconCls": "task"
+                        },
+                        {
+                            "title": "EnergyAuctionAgmt",
+                            "duration": 2,
+                            "type": "MasterAgreement",
+                            "leaf": true,
+                            "iconCls": "task"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

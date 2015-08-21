@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>my: pub</title>
+		<script type="text/javascript" src="../js/messaging/MessagingClientHub.js"></script>
+		<script>		
+			function getValueAndPublish() {
+				var value = document.getElementById("message").value;
+				publish("my_message", value);
+			}
+		</script>	
+	</head>
+	<body>
+	  <h2>my: Pub</h2>
+	  <div> 
+		<input type="text" id="message" value="Hello, world!" />
+		<input type="button" value="Publish Message" onclick="getValueAndPublish()"/>
+	  </div>
+	  <div id="output"></div>
+	</body>
+</html>

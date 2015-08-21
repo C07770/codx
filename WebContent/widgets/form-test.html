@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Form</title>
+		
+		<link rel="stylesheet" type="text/css" href="../extjs/resources/css/ext-all.css" />
+		<link rel="stylesheet" type="text/css" href="../css/portal.css" />
+		<script type="text/javascript" src="../extjs/ext-all.js"></script>
+		
+		<script>		
+		Ext.Loader.setConfig({
+			enabled : true
+		});
+		Ext.Loader.setPath('Ext.ux', 'extjs/ux');
+
+		Ext.require(['*']);
+
+		Ext.onReady(function() {
+					var url = "http://localhost:8080/codex-ui/test-data/enum-data.jso";
+		        					
+		        	var s = new Ext.data.Store({
+						fields : [{name: 'value'}],
+				        //autoload: true,
+						proxy: {
+				            type: 'ajax',
+				            url: url,
+				            reader: {
+				                type: 'json',
+				                root: 'customizedResults'
+				            }
+				        }
+				    });
+			
+					var simple = Ext.widget({
+						xtype : 'form',
+						layout : 'form',
+						frame : true,
+						bodyPadding : '5 5 0',
+						width : 350,
+						title: 'AutoComplete Test',
+						fieldDefaults : {
+							msgTarget : 'side',
+							labelWidth : 90
+						},
+						items : [{
+							xtype: 'combo',
+							typeAhead: true,
+						    enableKeyEvents: true,
+						    triggerAction: 'all',
+						    queryMode: 'remote',
+						    fieldLabel: 'Document ID',
+						    displayField: 'value',
+						    valueField: 'value',							
+						    name: 'name',
+						    minChars:1,
+						    store: s,
+						    listeners: {
+					           	change: function(e) {
+					                var u = url;
+					           		u += this.rawValue;
+					                console.info(u);
+					                s.getProxy().url = u;
+					                s.load();
+					            }
+					        }							
+						},{
+							xtype: 'combo',
+							typeAhead: true,
+						    enableKeyEvents: true,
+						    triggerAction: 'all',
+						    queryMode: 'remote',
+						    fieldLabel: 'Client ID',
+						    displayField: 'value',
+						    valueField: 'value',							
+						    name: 'name',
+						    minChars:1,
+						    store: s,
+						    listeners: {
+					           	change: function(e) {
+					                var u = url;
+					           		u += this.rawValue;
+					                console.info(u);
+					                s.getProxy().url = u;
+					                s.load();
+					            }
+					        }							
+						}],
+
+						buttons : [{
+							text : 'Save',
+							handler : function() {
+								this.up('form').getForm().isValid();
+							}
+						}, {
+							text : 'Cancel',
+							handler : function() {
+								this.up('form').getForm().reset();
+							}
+						}]
+					});									    
+				simple.render(document.body);
+				});
+		</script>	
+	</head>
+	<body>
+	</body>
+</html>
